@@ -1,0 +1,111 @@
+<div class="container">
+    <h2 class="text-center">Productos en Tiempo Real:</h2>
+    <div class="d-flex justify-content-center align-items-center m-2">
+        <form id="productForm" class="justify-content-center">
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <input id="title" type="text" class="form-control" placeholder="Título" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="description" type="text" class="form-control" placeholder="Descripción" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="code" type="text" class="form-control" placeholder="Código" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="price" type="number" class="form-control" placeholder="Precio" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="stock" type="number" class="form-control" placeholder="Stock" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="category" type="text" class="form-control" placeholder="Categoría" required />
+                </div>
+                <div class="col-6 mb-3">
+                    <input id="thumbnail" type="text" class="form-control" placeholder="URL de Imagen" required />
+                </div>
+                <div class="col-6 text-center">
+                    <button type="submit" class="form-control btn btn-primary">Agregar Producto</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="productList">
+        {{#each products}}
+        <div class="product-card" data-id="{{this.id}}">
+            <h5>{{this.title}}</h5>
+            <p>{{this.description}}</p>
+            <p>{{this.price}} ARS</p>
+            <button class="deleteBtn">Eliminar</button>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io();
+
+    socket.on('products', (products) => {
+        const productList = document.getElementById('productList');
+        productList.innerHTML = '';
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('row');
+
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('col-3', 'pt-4', 'card-container');
+            productDiv.innerHTML = `
+            <div class="card border-0">
+                <img src="${product.thumbnail}" class="card-img-top" alt="${product.title}" />
+                <div class="card-body">
+                    <h5 class="card-text text-center">${product.title}</h5>
+                    <p class="card-text text-center text-danger">${product.price} ARS</p>
+                    <p class="text-center">
+                        <button class="btn btn-dark rounded-pill deleteBtn">
+                            Eliminar <i class="bi bi-trash"></i>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        `;
+            rowDiv.appendChild(productDiv);
+
+            const deleteButton = productDiv.querySelector('.deleteBtn');
+            deleteButton.addEventListener('click', () => {
+                socket.emit('deleteProduct', product.id);
+            });
+        });
+        productList.appendChild(rowDiv);
+    });
+
+    const form = document.getElementById('productForm');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const product = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            code: document.getElementById('code').value,
+            price: parseFloat(document.getElementById('price').value),
+            stock: parseInt(document.getElementById('stock').value),
+            category: document.getElementById('category').value,
+            thumbnail: document.getElementById('thumbnail').value,
+            status: true,
+            id: Math.floor(Math.random() * 10000)
+        };
+
+        socket.emit('newProduct', product);
+        form.reset();
+    });
+
+    document.getElementById('productList').addEventListener('click', (event) => {
+        if (event.target.classList.contains('deleteBtn')) {
+            const productId = event.target.parentElement.dataset.id;
+            socket.emit('deleteProduct', parseInt(productId));
+        }
+    });
+</script>

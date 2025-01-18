@@ -1,0 +1,24 @@
+<h2 class="pb-5">Listado de productos:</h2>
+{{#if products}}
+    <div class="row">
+    {{#each products}}
+        <div class="col-3 card-container">
+            <div class="card border-0">
+                <img src={{thumbnail}} class="card-img-top" max-height="600" alt={{title}} />
+                <div class="card-body">
+                    <h4 class="card-text text-center">{{title}}</h4>
+                    <h4><p class="card-text text-center text-danger pb-2"><b>${{price}} ARS </b></p></h4>
+                    <p class="text-center">
+                        <button class="btn btn-dark rounded-pill">
+                            <a class='text-decoration-none text-light'> Ver Más </i></a>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+{{else}}
+    <h5>No hay Productos Disponibles.</h5>
+{{/if}}

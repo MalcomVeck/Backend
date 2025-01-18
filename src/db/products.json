@@ -1,1 +1,24 @@
-[{"title":"Table Surf","description":"Tabla de Surf","code":"01","price":"300.000","status":"true","stock":"33","category":"Surfing","id":268},{"title":"Table Surf","description":"Tabla de Surf","code":"01","price":"300.000","status":"true","stock":"33","category":"Surfing","id":218},{"title":"Table Surf","description":"Tabla de Surf","code":"01","price":"300.000","status":"true","stock":"33","category":"Surfing","id":738},{"title":"Table Surf","description":"Tabla do Surfing","code":"01","price":"600.000","status":"true","stock":"37","category":"Surfingg","id":75}]
+[
+    {
+    "title": "Surf Freelife Leashes",
+    "description": "Marca: Freelife",
+    "code": "737",
+    "price": 30000,
+    "stock": 33,
+    "category": "Surf",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_222925-MLA25515368065_042017-O.webp",
+    "status": true,
+    "id": 3747
+    },
+    {
+        "title": "Quillas Surf Tri Fcsii",
+        "description": "Shock'n Blue Core Flex",
+        "code": "778",
+        "price": 150000,
+        "stock": 27,
+        "category": "Surf",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_705230-MLA77621451656_072024-O.webp",
+        "status": true,
+        "id": 2737
+        }
+]
