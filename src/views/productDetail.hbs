@@ -1,0 +1,21 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <img src={{product.thumbnail}} class="img-fluid" alt="{{product.title}}" />
+        </div>
+        <div class="col">
+            <h1>{{product.title}}</h1>
+            <hr />
+            <p class="text-danger fs-3">${{product.price}} ARS</p>
+            <p>Descripción: {{product.description}}</p>
+            <p>Categoría/s: {{product.category}}, {{product.type}}</p>
+            <hr />
+            <div>
+                <form action="/api/carts/67a4e3e8be8f85bd9a3ac472/products/{{product._id}}" method="post"
+                    class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark rounded-pill">Agregar Al Carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

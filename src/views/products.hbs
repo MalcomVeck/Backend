@@ -19,14 +19,13 @@
     {{#each products}}
     <div class="col-3 card-container">
         <div class="card border-0">
-            <a href="/product/{{this._id}}">
-                <img src="{{this.thumbnail}}" class="card-img-top" alt="{{this.title}}" />
-            </a>
+            <img src={{this.thumbnail}} class="card-img-top" alt={{this.title}} />
             <div class="card-body">
                 <h5 class="card-text text-center">{{this.title}}</h5>
                 <p class="card-text text-center text-danger">${{this.price}} ARS</p>
                 <p class="text-center">
-                <form action="/api/carts/67a4e3e8be8f85bd9a3ac472/products/{{this._id}}" method="post" class="d-flex justify-content-center">
+                <form action="/api/carts/67a4e3e8be8f85bd9a3ac472/products/{{this._id}}" method="post"
+                    class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark rounded-pill">Agregar Al Carrito</button>
                 </form>
                 </p>
